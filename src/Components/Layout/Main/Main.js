@@ -12,7 +12,7 @@ const Main = () => {
             <Header />
             <Container>
                 <Row>
-                    <Col lg='2'>
+                    <Col lg='2' className='d-none d-lg-block'>
                         <LeftSIdeNav />
                     </Col>
                     <Col lg='7'>
