@@ -6,9 +6,21 @@ import News from './Components/News/News/News';
 const router = createBrowserRouter([
   {
     path: '/', element: <Main />, children: [
-      { path: '/', element: <Home /> },
-      { path: '/news/:id', element: <News /> },
-      { path: '/category/:id', element: <Category /> },
+      {
+        path: '/',
+        element: <Home />,
+        loader: () => fetch('http://localhost:5000/news')
+      },
+      {
+        path: '/news/:id',
+        element: <News />,
+        loader: ({ params }) => fetch(`http://localhost:5000/news/${params.id}`)
+      },
+      {
+        path: '/category/:id',
+        element: <Category />,
+        loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+      },
     ]
   },
 ])

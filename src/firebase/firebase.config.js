@@ -10,10 +10,10 @@ const firebaseConfig = {
     projectId: "daylight-news-4060e",
     storageBucket: "daylight-news-4060e.appspot.com",
     messagingSenderId: "273420123328",
-    appId: "1:273420123328:web:49174493cb0c7fe5784125"
+    appId: "1:273420123328:web:49174493cb0c7fe5784125",
+
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export default app;
