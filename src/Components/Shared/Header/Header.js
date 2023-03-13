@@ -1,9 +1,13 @@
-import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSIdeNav from '../LeftSIdeNav/LeftSIdeNav';
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
+    console.log(user);
     return (
         <Navbar className='mb-3' collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
@@ -25,10 +29,12 @@ const Header = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
+                    <Nav className='d-flex align-items-center'>
+                        <Nav.Link href="#deets">{user?.displayName}</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                            {user?.photoURL ? <Image roundedCircle style={{ height: '38px' }} src={user.photoURL} ></Image >
+                                : <FaUser className='fs-2'></FaUser>
+                            }
                         </Nav.Link>
                     </Nav>
                     <div className="d-lg-none">
