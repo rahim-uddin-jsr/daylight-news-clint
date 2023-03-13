@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 const NewsSummeryCard = ({ news }) => {
     const { _id, title, details, image_url, author, total_view, rating } = news
     return (
-        <div>
+        <div className='mb-3 px-5'>
             <Card >
                 <Card.Header className=" d-flex align-items-center justify-content-between" >
                     <div className='d-flex align-items-center'>
-                    <Image roundedCircle style={{ height: '62px' }} src={author.img} ></Image >
+                        <Image roundedCircle style={{ height: '62px' }} src={author.img} ></Image >
                         <div className='ms-2' >
                             <p className='mb-0'>{author?.name}</p>
                             <p className='mb-0'>{author?.published_date}</p>

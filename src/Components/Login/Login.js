@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
     const { loginWithEmailPassword } = useContext(AuthContext);
+    const navigate = useNavigate()
     const handleLogIn = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -12,7 +14,10 @@ const Login = () => {
 
         loginWithEmailPassword(email, password)
             .then(result => {
+                form.reset();
+                navigate('/home');
                 alert('login success')
+
             }).catch(error => {
                 console.error(error)
             })
@@ -34,8 +39,9 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
+                <p>forgat Password? <Link to='/reset-password'>reset</Link></p>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Login
                 </Button>
             </Form>
         </div>

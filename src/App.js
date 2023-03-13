@@ -5,11 +5,17 @@ import Main from './Components/Layout/Main/Main';
 import Login from './Components/Login/Login';
 import News from './Components/News/News/News';
 import Register from './Components/Register/Register';
+import ResetPassword from './Components/ResetPassword/ResetPassword';
 const router = createBrowserRouter([
   {
     path: '/', element: <Main />, children: [
       {
         path: '/',
+        element: <Home />,
+        loader: () => fetch('http://localhost:5000/news')
+      },
+      {
+        path: '/home',
         element: <Home />,
         loader: () => fetch('http://localhost:5000/news')
       },
@@ -30,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />,
+      },
+      {
+        path: '/reset-password',
+        element: <ResetPassword />,
       }
 
     ]
