@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const [error, setError] = useState('')
     const { loginWithEmailPassword } = useContext(AuthContext);
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
     const handleLogIn = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -15,11 +18,12 @@ const Login = () => {
         loginWithEmailPassword(email, password)
             .then(result => {
                 form.reset();
-                navigate('/home');
+                navigate(from, { replace: true });
                 alert('login success')
 
             }).catch(error => {
-                console.error(error)
+                const massage = error.message;
+                setError(massage)
             })
     }
     return (
@@ -39,7 +43,8 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
-                <p>forgat Password? <Link to='/reset-password'>reset</Link></p>
+                <p>forgat Password?<Link to='/reset-password'> reset</Link></p>
+                {error && <h5 className='text-danger'>{error}</h5>}
                 <Button variant="primary" type="submit">
                     Login
                 </Button>

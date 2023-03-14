@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
     const { user, registerWithEmailPassword, updateUserProfile } = useContext(AuthContext)
-    console.log(user);
+    const [error, setError] = useState('')
+
     const handleRegister = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -20,14 +21,13 @@ const Register = () => {
                 updateUserProfile({ displayName: name, photoURL: photoURL })
                     .then(() => {
                         alert('Registration Completed')
-
+                        setError('')
                     }).catch((error) => {
-                        // An error occurred
-                        // ...
+
                     });
             }).catch(error => {
-                console.error(error)
-                alert('Something went wrong try again later')
+                const massage = error.message;
+                setError(massage)
             })
     }
 
@@ -58,6 +58,7 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
+                {error && <h5 className='text-danger'>{error}</h5>}
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
