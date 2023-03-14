@@ -4,6 +4,8 @@ import Home from "../../Home/Home";
 import Main from "../../Layout/Main/Main";
 import Login from "../../Login/Login";
 import News from "../../News/News/News";
+import Profile from "../../Others/Profile/Profile";
+import TermsAndCondition from "../../Others/TermsAndCondition/TarmsAndCondition";
 import Register from "../../Register/Register";
 import ResetPassword from "../../ResetPassword/ResetPassword";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -42,7 +44,15 @@ export const router = createBrowserRouter([
             {
                 path: '/reset-password',
                 element: <ResetPassword />,
-            }
+            },
+            {
+                path: '/terms',
+                element: <TermsAndCondition />,
+            },
+            {
+                path: '/profile',
+                element: <Profile />,
+            },
 
         ]
     },

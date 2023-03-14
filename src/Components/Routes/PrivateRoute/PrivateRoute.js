@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const PrivateRoute = ({ children }) => {
     const location = useLocation()
     const { user, loading } = useContext(AuthContext)
+    console.log(user);
     if (loading) {
         return (
             <div className='d-flex justify-content-center mt-5'>
@@ -15,7 +16,7 @@ const PrivateRoute = ({ children }) => {
             </div>
         );
     }
-    if (!user) {
+    if (!user?.uid) {
         return <Navigate to='/login' state={{ from: location }} replace></Navigate>
     }
     else {

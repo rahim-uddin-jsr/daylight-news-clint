@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const { user, registerWithEmailPassword, updateUserProfile } = useContext(AuthContext)
+    const { user, registerWithEmailPassword, updateUserProfile, verifyMail } = useContext(AuthContext)
     const [error, setError] = useState('')
+    const [accepted, setAccepted] = useState(false)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -25,21 +28,34 @@ const Register = () => {
                     }).catch((error) => {
 
                     });
+                handleEmailVerification()
             }).catch(error => {
                 const massage = error.message;
                 setError(massage)
             })
     }
+    const handleEmailVerification = () => {
+        verifyMail().then(() => {
+            toast.success('Verification Mail Send')
+        })
+            .catch(error => {
 
+            })
+    }
+    const handleAccepted = (e) => {
+        const isChecked = e.target.checked;
+        setAccepted(isChecked)
+    }
+    console.log(accepted);
     return (
         <div>
             <h2>Please Register</h2>
             <Form onSubmit={handleRegister}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control name='name' type="text" placeholder="Enter email" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicProfileUrl">
                     <Form.Label>Profile Image Url</Form.Label>
                     <Form.Control name='photoUrl' type="url" placeholder="Enter photo url" />
                 </Form.Group>
@@ -56,10 +72,17 @@ const Register = () => {
                     <Form.Control name='password' type="password" placeholder="Password" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
+                    <Form.Check
+                        onChange={handleAccepted}
+                        type="checkbox"
+                        label={
+                            <>
+                                Agree
+                                <Link to='/terms'>Terms and Condition</Link>
+                            </>} />
                 </Form.Group>
                 {error && <h5 className='text-danger'>{error}</h5>}
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" disabled={!accepted}>
                     Submit
                 </Button>
             </Form>
