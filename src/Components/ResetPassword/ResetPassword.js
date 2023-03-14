@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ResetPassword = () => {
@@ -11,13 +12,13 @@ const ResetPassword = () => {
         console.log(email);
         resetPassword(email)
             .then(() => {
-                alert('Password reset email sent!')
+                toast.success('Password reset email sent!')
             })
             .catch((error) => {
-                const errorCode = error.code;
+
                 const errorMessage = error.message;
-                if (errorMessage == 'Firebase: Error (auth/user-not-found).') {
-                    alert('User not Found')
+                if (errorMessage === 'Firebase: Error (auth/user-not-found).') {
+                    toast.error('User not Found')
                 }
                 // alert(errorMessage, errorCode)
                 // ..

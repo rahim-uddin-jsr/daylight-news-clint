@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const { user, registerWithEmailPassword, updateUserProfile, verifyMail } = useContext(AuthContext)
+    const { registerWithEmailPassword, updateUserProfile, verifyMail } = useContext(AuthContext)
     const [error, setError] = useState('')
     const [accepted, setAccepted] = useState(false)
 

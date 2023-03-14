@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Image } from 'react-bootstrap';
-import { FaBookmark, FaEye, FaShareAlt, FaStar, FaStreetView } from 'react-icons/fa';
+import { FaBookmark, FaEye, FaShareAlt, FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const NewsSummeryCard = ({ news }) => {

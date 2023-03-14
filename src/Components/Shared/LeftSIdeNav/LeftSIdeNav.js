@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const LeftSIdeNav = () => {
@@ -8,10 +9,9 @@ const LeftSIdeNav = () => {
             .then(res => res.json())
             .then(data => {
                 setCategory(data)
-                console.log(data);
             })
             .catch(error => {
-                console.log(error)
+                toast.error(error.message)
             })
     }, [])
     return (

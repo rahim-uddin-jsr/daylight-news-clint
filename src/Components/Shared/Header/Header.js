@@ -56,7 +56,7 @@ const Header = () => {
                         </Nav>
                         {
                             user?.uid &&
-                            <Link eventKey={2} to="/profile">
+                            <Link to="/profile">
                                 {user?.photoURL ? <Image roundedCircle style={{ height: '38px' }} src={user?.photoURL} ></Image >
                                     :
                                     <FaUser className='fs-2'></FaUser>
