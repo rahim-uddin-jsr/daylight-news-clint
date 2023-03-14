@@ -41,7 +41,9 @@ const Header = () => {
                             {user?.uid ?
                                 <>
                                     {user.displayName}
-                                    <Button onClick={handleLogOut} variant='light'>LogOut</Button>
+                                    <Button className='mx-2' onClick={handleLogOut} variant='light'>LogOut</Button>
+                                    <Link className='me-2' to='/profile'><Button variant='dark-outline'>Profile</Button></Link>
+
                                 </>
                                 :
                                 <>
@@ -54,12 +56,12 @@ const Header = () => {
                         </Nav>
                         {
                             user?.uid &&
-                            <Nav.Link eventKey={2} href="#memes">
+                            <Link eventKey={2} to="/profile">
                                 {user?.photoURL ? <Image roundedCircle style={{ height: '38px' }} src={user?.photoURL} ></Image >
                                     :
                                     <FaUser className='fs-2'></FaUser>
                                 }
-                            </Nav.Link>
+                            </Link>
                         }
                     </Nav>
                     <div className="d-lg-none">
